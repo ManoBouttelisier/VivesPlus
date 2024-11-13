@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct UurroosterItemInListView: View {
+    @Environment(UurroosterDataStore.self) private var datastore
+    @Binding var selection: String
     var body: some View {
-        
+        NavigationStack {
+            
+            }
+        }
     }
-}
-
-#Preview {
-    UurroosterItemInListView()
-}
 

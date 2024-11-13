@@ -1,27 +1,39 @@
-//
-//  UurroosterList.swift
-//  VivesPlus
-//
-//  Created by Mano Bouttelisier on 12/11/2024.
-//
-
 import SwiftUI
 
 struct UurroosterList: View {
+    @Environment(UurroosterDataStore.self) private var datastore
+    @State var selection: EventModel?
+
     var body: some View {
-       NavigationStack {
-           VStack{
-               Text("Uurrooster")
-                  .font(.title)
-                  .bold()
-           }
-                NavigationSplitView(
-                  sidebar: <#T##() -> View#>,
-                  detail: <#T##() -> View#>)
+        VStack {
+            
+            List(datastore.getEvents(), id: \.self, selection: $selection) { event in
+                VStack {
+                    if event.allDay != true {
+                        Text(DateUtil.formatDateTime(date: event.startDateTime))
+                        Spacer()
+                    }
+                    HStack {
+                        Text(event.title)
+                        Spacer()
+                        //Text(event.date.formatted(.dateTime))
+                    }
+                    
+                    // Corrected closing braces for the else statement
+                    if event.allDay == true {
+                        HStack {
+                            Text(DateUtil.formatDateTime(date: event.startDateTime))
+                            Spacer()
+                            //Text(event.date.formatted(.dateTime))
+                        }
+                        HStack {
+                            Text(event.title)
+                            Spacer()
+                            //Text(event.date.formatted(.dateTime))
+                        }
+                    }
+                }
+            }
         }
     }
-}
-
-#Preview {
-    UurroosterList()
 }

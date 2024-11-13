@@ -10,8 +10,10 @@ import SwiftUI
 @main
 struct VivesPlusApp: App {
     var body: some Scene {
+        @State var datastore = UurroosterDataStore()
         WindowGroup {
             ContentView()
+                .environment(datastore)
         }
     }
 }
